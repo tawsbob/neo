@@ -1,11 +1,27 @@
-import { serve } from '@hono/node-server'
-import { Hono } from 'hono'
 
+import { PrismaClient } from '../generated/prisma';
+import { enhance } from '@zenstackhq/runtime';
+import { createHonoHandler } from '@zenstackhq/server/hono';
+import { Context, Hono } from 'hono'
+
+import { serve } from '@hono/node-server'
+
+const prisma = new PrismaClient();
 const app = new Hono()
 
 app.get('/', (c) => {
   return c.text('Hello Hono!')
 })
+
+app.use(
+  '/api/model/*',
+  createHonoHandler({
+      getPrisma: (ctx) => {
+          return enhance(prisma, { user: null });
+      },
+  })
+);
+
 
 serve({
   fetch: app.fetch,

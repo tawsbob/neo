@@ -4,7 +4,9 @@
   "description": "URL Shortener Service",
   "main": "dist/index.js",
   "scripts": {
-    "dev:api": "tsx watch src/backend/index.ts"
+    "dev:api": "tsx watch src/backend/index.ts",
+    "generate": "zenstack generate && prisma migrate dev",
+    "prisma-studio": "npx prisma studio"
   },
   "keywords": [
     "url-shortener",
@@ -17,12 +19,16 @@
   "license": "ISC",
   "dependencies": {
     "@hono/node-server": "^1.14.1",
+    "@prisma/client": "6.6.x",
+    "@zenstackhq/runtime": "2.14.0",
+    "@zenstackhq/server": "^2.14.0",
     "hono": "^4.7.7"
   },
   "devDependencies": {
     "@types/node": "^22.14.1",
-    "prisma": "^6.6.0",
+    "prisma": "6.6.x",
     "tsx": "^4.19.3",
-    "typescript": "^5.8.3"
+    "typescript": "^5.8.3",
+    "zenstack": "2.14.0"
   }
 }
