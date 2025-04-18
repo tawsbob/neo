@@ -2,7 +2,8 @@
 import { PrismaClient } from '../generated/prisma';
 import { enhance } from '@zenstackhq/runtime';
 import { createHonoHandler } from '@zenstackhq/server/hono';
-import { Context, Hono } from 'hono'
+import { Hono } from 'hono'
+import { logger } from 'hono/logger'  
 
 import { serve } from '@hono/node-server'
 
@@ -15,6 +16,7 @@ app.get('/', (c) => {
 
 app.use(
   '/api/model/*',
+  logger(),
   createHonoHandler({
       getPrisma: (ctx) => {
           return enhance(prisma, { user: null });
