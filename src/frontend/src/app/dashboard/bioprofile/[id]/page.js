@@ -5,10 +5,13 @@ import { useRouter } from 'next/navigation';
 import ProtectedRoute from "@/components/ProtectedRoute";
 import DashboardLayout from "@/components/_ui/DashboardLayout";
 import Button from '@/components/_ui/button';
-import styles from '@/components/BioProfile/bioProfile.module.scss';
+import Input from '@/components/_ui/input';
 import { bioProfileApi } from '@/services/apiService';
 import Link from 'next/link';
 import { LINKS } from '@/utils/links';
+import Card from '@/components/_ui/Card';
+import HorizontalGap from '@/components/_ui/HorizontalGap';
+import VerticalGap from '@/components/_ui/VerticalGap';
 
 export default function EditBioProfilePage({ params }) {
   const router = useRouter();
@@ -81,6 +84,14 @@ export default function EditBioProfilePage({ params }) {
       ...formData,
       [name]: value
     });
+
+    // Clear error when user types
+    if (errors[name]) {
+      setErrors({
+        ...errors,
+        [name]: ""
+      });
+    }
   };
 
   const handleSubmit = async (e) => {
@@ -118,8 +129,8 @@ export default function EditBioProfilePage({ params }) {
       <ProtectedRoute>
         <DashboardLayout>
           <div>
-            <Link href={LINKS.DASHBOARD_BIOPROFILE} className={styles.backLink}>
-              <span className={styles.backIcon}>←</span> Back to Bio Profiles
+            <Link href={LINKS.DASHBOARD_BIOPROFILE}>
+              <span>←</span> Back to Bio Profiles
             </Link>
             <h1>Edit Bio Profile</h1>
             <p>Loading profile...</p>
@@ -134,8 +145,8 @@ export default function EditBioProfilePage({ params }) {
       <ProtectedRoute>
         <DashboardLayout>
           <div>
-            <Link href={LINKS.DASHBOARD_BIOPROFILE} className={styles.backLink}>
-              <span className={styles.backIcon}>←</span> Back to Bio Profiles
+            <Link href={LINKS.DASHBOARD_BIOPROFILE}>
+              <span>←</span> Back to Bio Profiles
             </Link>
             <h1>Edit Bio Profile</h1>
             <p className="error">{error}</p>
@@ -149,107 +160,72 @@ export default function EditBioProfilePage({ params }) {
   return (
     <ProtectedRoute>
       <DashboardLayout>
-        <div>
-          <Link href={LINKS.DASHBOARD_BIOPROFILE} className={styles.backLink}>
-            <span className={styles.backIcon}>←</span> Back to Bio Profiles
+        <VerticalGap>
+          <Link href={LINKS.DASHBOARD_BIOPROFILE}>
+            <span>←</span> Back to Bio Profiles
           </Link>
-
-          <div className={styles.pageHeader}>
-            <h1>Edit Bio Profile</h1>
-            <Button 
-              type="deleteButton" 
-              className={styles.deleteButton} 
-              onClick={handleDelete}
-            >
-              Delete Profile
-            </Button>
-          </div>
-          
-          <form className={styles.form} onSubmit={handleSubmit}>
-            <div className={styles.formGroup}>
-              <label htmlFor="title" className={styles.label}>
-                Profile Title
-              </label>
-              <input
+            
+          <Card>
+            <form onSubmit={handleSubmit}>
+              <Input
+                label="Profile Title"
                 type="text"
-                id="title"
                 name="title"
                 value={formData.title}
                 onChange={handleChange}
-                className={styles.input}
                 placeholder="e.g. My Personal Links"
+                error={errors.title}
+                required
               />
-              {errors.title && <p className={styles.errorText}>{errors.title}</p>}
-            </div>
 
-            <div className={styles.formGroup}>
-              <label htmlFor="description" className={styles.label}>
-                Description (Optional)
-              </label>
-              <textarea
-                id="description"
+              <Input
+                label="Description (Optional)"
+                type="textarea"
                 name="description"
                 value={formData.description}
                 onChange={handleChange}
-                className={styles.textarea}
                 placeholder="Short description about this profile"
                 rows={3}
+                maxLength={500}
               />
-            </div>
 
-            <div className={styles.formGroup}>
-              <label htmlFor="url" className={styles.label}>
-                Profile URL
-              </label>
-              <input
+              <Input
+                label="Profile URL"
                 type="text"
-                id="url"
                 name="url"
                 value={formData.url}
                 onChange={handleChange}
-                className={styles.input}
                 placeholder="my-profile"
+                error={errors.url}
+                required
               />
-              {errors.url && <p className={styles.errorText}>{errors.url}</p>}
-            </div>
 
-            <div className={styles.formGroup}>
-              <label htmlFor="image" className={styles.label}>
-                Profile Image URL (Optional)
-              </label>
-              <input
+              <Input
+                label="Profile Image URL (Optional)"
                 type="text"
-                id="image"
                 name="image"
                 value={formData.image}
                 onChange={handleChange}
-                className={styles.input}
                 placeholder="https://example.com/image.jpg"
               />
-            </div>
 
-            <div className={styles.formActions}>
-              <Button 
-                type="main" 
-                buttonType="submit" 
-                disabled={submitting}
-              >
-                {submitting ? 'Saving...' : 'Save Changes'}
-              </Button>
-              <Link href={LINKS.DASHBOARD_BIOPROFILE}>
-                <Button type="button" className={styles.cancelButton}>
-                  Cancel
+              <HorizontalGap type="sm">
+                <Button 
+                  type="main small" 
+                  buttonType="submit" 
+                  disabled={submitting}
+                >
+                  {submitting ? 'Saving...' : 'Save Changes'}
                 </Button>
-              </Link>
-            </div>
-          </form>
-          
-          <Link href={`${LINKS.DASHBOARD_LINKINBIO}?profileId=${profileId}`}>
-            <Button type="main" className={styles.manageLinksButton}>
-              Manage Links
-            </Button>
-          </Link>
-        </div>
+                <Link href={LINKS.DASHBOARD_BIOPROFILE}>
+                  <Button type="gray small">
+                    Cancel
+                  </Button>
+                </Link>
+              </HorizontalGap>
+            </form>
+          </Card>
+        </VerticalGap>
       </DashboardLayout>
     </ProtectedRoute>
   );

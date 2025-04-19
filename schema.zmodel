@@ -54,7 +54,7 @@ model BioProfile {
   title String
   description String?
   image String?
-  url String
+  url String @unique()
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
   
@@ -78,5 +78,6 @@ model LinkInBio {
   @@allow('read', true)
   @@allow('create', auth() != null)
   @@allow('update', auth().id == this.bioProfile.userId)
+  @@allow('delete', auth().id == this.bioProfile.userId)
   @@allow('all', auth().role == 'ADMIN')
 }

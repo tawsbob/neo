@@ -9,6 +9,7 @@ function Button({
   type = "",
   text = null,
   buttonType = "button",
+  href = null,
   onClick = () => {},
   children,
   ...props
@@ -18,6 +19,10 @@ function Button({
   function _proxyClick(e) {
     if (onClick) {
       onClick(e);
+    }
+
+    if (href) {
+      window.open(href, "_blank");
     }
   }
 

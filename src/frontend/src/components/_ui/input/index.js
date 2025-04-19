@@ -17,6 +17,7 @@ function Input({
   inputType = "",
   required = false,
   disabled = false,
+  maxLength = 250,
   ...props
 }) {
   const classTypes = withTypes(inputType);
@@ -27,6 +28,8 @@ function Input({
 
   const hasValue = value !== "";
   const hasError = error !== "";
+  const showCharCounter = type === "textarea";
+  const charCount = value?.length || 0;
   
   return (
     <div className={c(
@@ -44,20 +47,40 @@ function Input({
         </label>
       )}
       <div className={c("field-container")}>
-        <input
-          type={type}
-          id={name}
-          name={name}
-          className={c("input")}
-          placeholder={placeholder}
-          value={value}
-          onChange={handleChange}
-          disabled={disabled}
-          required={required}
-          {...props}
-        />
+        {type === "textarea" ? (
+          <textarea
+            id={name}
+            name={name}
+            className={c("input")}
+            placeholder={placeholder}
+            value={value}
+            onChange={handleChange}
+            disabled={disabled}
+            required={required}
+            maxLength={maxLength}
+            {...props}
+          />
+        ) : (
+          <input
+            type={type}
+            id={name}
+            name={name}
+            className={c("input")}
+            placeholder={placeholder}
+            value={value}
+            onChange={handleChange}
+            disabled={disabled}
+            required={required}
+            {...props}
+          />
+        )}
       </div>
       {hasError && <div className={c("error")}>{error}</div>}
+      {showCharCounter && (
+        <div className={c("char-counter", toggle(charCount > maxLength * 0.8, "near-limit"))}>
+          {charCount}/{maxLength}
+        </div>
+      )}
     </div>
   );
 }

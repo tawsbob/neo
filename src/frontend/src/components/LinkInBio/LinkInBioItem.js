@@ -1,6 +1,5 @@
 "use client";
 import React from 'react';
-import PropTypes from 'prop-types';
 import styles from './linkInBio.module.scss';
 import Button from '@/components/_ui/button';
 
@@ -15,13 +14,13 @@ const LinkInBioItem = ({ link, onEdit, onDelete }) => {
       </div>
       <div className={styles.linkActions}>
         <Button 
-          className={styles.editButton} 
+          type="gray small"
           onClick={() => onEdit(link)}
         >
           Edit
         </Button>
         <Button 
-          className={styles.deleteButton} 
+          type="red small"
           onClick={() => onDelete(id)}
         >
           Delete
@@ -30,15 +29,4 @@ const LinkInBioItem = ({ link, onEdit, onDelete }) => {
     </div>
   );
 };
-
-LinkInBioItem.propTypes = {
-  link: PropTypes.shape({
-    id: PropTypes.number.isRequired,
-    label: PropTypes.string.isRequired,
-    url: PropTypes.string.isRequired,
-  }).isRequired,
-  onEdit: PropTypes.func.isRequired,
-  onDelete: PropTypes.func.isRequired,
-};
-
 export default LinkInBioItem; 

@@ -11,6 +11,7 @@ import styles from '@/components/LinkInBio/linkInBio.module.scss';
 import { linkInBioApi, bioProfileApi } from '@/services/apiService';
 import Link from 'next/link';
 import { LINKS } from '@/utils/links';
+import VerticalGap from '@/components/_ui/VerticalGap';
 
 export default function LinkInBioPage() {
   const searchParams = useSearchParams();
@@ -32,7 +33,7 @@ export default function LinkInBioPage() {
 
   const fetchBioProfile = async () => {
     try {
-      const data = await bioProfileApi.getById(profileId);
+      const { data } = await bioProfileApi.getById(profileId);
       setBioProfile(data);
     } catch (err) {
       console.error('Error fetching bio profile:', err);
@@ -43,7 +44,7 @@ export default function LinkInBioPage() {
   const fetchLinks = async () => {
     try {
       setLoading(true);
-      const data = await linkInBioApi.getAll(profileId);
+      const { data } = await linkInBioApi.getAll(profileId);
       setLinks(data);
       setError(null);
     } catch (err) {
@@ -90,8 +91,8 @@ export default function LinkInBioPage() {
           ...formData,
           bioProfileId: profileId
         });
-        setLinks([...links, newLink]);
       }
+      fetchLinks();
       setShowForm(false);
       setEditingLink(null);
     } catch (err) {
@@ -121,20 +122,22 @@ export default function LinkInBioPage() {
     );
   }
 
+  const profileUrl = LINKS.BIOPROFILE(bioProfile?.url)
+
   return (
     <ProtectedRoute>
       <DashboardLayout>
-        <div>
-          <Link href={LINKS.DASHBOARD_BIOPROFILE} className={styles.backLink}>
-            <span className={styles.backIcon}>←</span> Back to Bio Profiles
+        <VerticalGap>
+          <Link href={LINKS.DASHBOARD_BIOPROFILE}>
+            <Button type="small"><span>←</span> Back to Bio Profiles</Button>
           </Link>
-
-          <h1>Manage Links</h1>
           
           {bioProfile && (
             <div className={styles.profileInfo}>
               <h2 className={styles.profileTitle}>{bioProfile.title}</h2>
-              <p className={styles.profileUrl}>{bioProfile.url}</p>
+              <p className={styles.profileUrl}>
+                <Link href={profileUrl}>{profileUrl}</Link>
+              </p>
             </div>
           )}
           
@@ -150,8 +153,8 @@ export default function LinkInBioPage() {
             <h3>Your Links</h3>
             {!showForm && (
               <Button 
+                type="main small"
                 onClick={handleAddLink}
-                className={styles.addButton}
               >
                 Add New Link
               </Button>
@@ -175,7 +178,7 @@ export default function LinkInBioPage() {
           )}
           
           {!loading && !error && links.length > 0 && (
-            <div className={styles.linksContainer}>
+            <div>
               {links.map((link) => (
                 <LinkInBioItem 
                   key={link.id}
@@ -186,7 +189,7 @@ export default function LinkInBioPage() {
               ))}
             </div>
           )}
-        </div>
+        </VerticalGap>
       </DashboardLayout>
     </ProtectedRoute>
   );

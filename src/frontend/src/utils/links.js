@@ -8,5 +8,7 @@ export const LINKS = {
     DASHBOARD: '/dashboard',
     DASHBOARD_SHORTURL: '/dashboard/shorturl',
     DASHBOARD_BIOPROFILE: '/dashboard/bioprofile',
+    DASHBOARD_BIOPROFILE_CREATE: '/dashboard/bioprofile/create',
     DASHBOARD_LINKINBIO: '/dashboard/bioprofile/linkinbio',
+    BIOPROFILE: (url) => `/bio/${url}`,
 }

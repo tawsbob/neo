@@ -69,6 +69,8 @@
   color: var(--primary);
   width: 100%;
   background: transparent;
+  min-height: 100%;
+  resize: vertical;
 
   &::placeholder {
     //color: var(--stone-stone-400);
@@ -80,4 +82,15 @@
   font-size: 12px;
   margin-top: 4px;
   color: var(--red);
+}
+
+.char-counter {
+  font-size: 12px;
+  text-align: right;
+  margin-top: 4px;
+  color: var(--text-light, #6b7280);
+  
+  &.near-limit {
+    color: var(--warning, #f59e0b);
+  }
 } 

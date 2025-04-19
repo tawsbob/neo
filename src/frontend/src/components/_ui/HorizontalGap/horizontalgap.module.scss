@@ -1,0 +1,27 @@
+.container {
+    display: flex;
+    flex-direction: row;
+    gap: var(--gap-lg);
+
+    &.sm {
+        gap: var(--gap);
+    }
+
+    &.center {
+        justify-content: center;
+    }
+
+    &.right {
+        justify-content: flex-end;
+    }
+
+    &.vertical-centered {
+        align-items: center;
+    }
+
+    @media (max-width: 900px) {
+        &.column {
+            flex-direction: column;
+        }
+    }
+} 

@@ -3,6 +3,7 @@ import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import styles from './linkInBio.module.scss';
 import Button from '@/components/_ui/button';
+import Card from '../_ui/Card';
 
 const LinkInBioForm = ({ initialValues, onSubmit, onCancel }) => {
   const [formData, setFormData] = useState({
@@ -63,7 +64,8 @@ const LinkInBioForm = ({ initialValues, onSubmit, onCancel }) => {
   };
 
   return (
-    <form className={styles.form} onSubmit={handleSubmit}>
+    <Card>
+      <form onSubmit={handleSubmit}>
       <div className={styles.formGroup}>
         <label htmlFor="label" className={styles.label}>
           Link Label
@@ -97,13 +99,13 @@ const LinkInBioForm = ({ initialValues, onSubmit, onCancel }) => {
       </div>
 
       <div className={styles.formActions}>
-        <Button type="submit" className={styles.submitButton}>
+        <Button type="main small" buttonType="submit" className={styles.submitButton}>
           {initialValues?.id ? 'Update Link' : 'Add Link'}
         </Button>
         {onCancel && (
           <Button 
-            type="button" 
-            className={styles.cancelButton} 
+            type="gray small"
+            buttonType="button" 
             onClick={onCancel}
           >
             Cancel
@@ -111,6 +113,7 @@ const LinkInBioForm = ({ initialValues, onSubmit, onCancel }) => {
         )}
       </div>
     </form>
+    </Card>
   );
 };
 

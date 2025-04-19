@@ -3,12 +3,15 @@
 import { useState, useEffect } from 'react';
 import ProtectedRoute from "@/components/ProtectedRoute";
 import DashboardLayout from "@/components/_ui/DashboardLayout";
-import BioProfileCard from '@/components/BioProfile/BioProfileCard';
 import Button from '@/components/_ui/button';
-import styles from '@/components/BioProfile/bioProfile.module.scss';
+import styles from './page.module.scss';
 import { bioProfileApi } from '@/services/apiService';
 import Link from 'next/link';
 import { LINKS } from '@/utils/links';
+import HorizontalGap from '@/components/_ui/HorizontalGap';
+import Card from '@/components/_ui/Card';
+import VerticalGap from '@/components/_ui/VerticalGap';
+import BioProfileItem from '@/components/BioProfile/BioProfileItem';
 
 export default function BioProfilesPage() {
   const [bioProfiles, setBioProfiles] = useState([]);
@@ -37,10 +40,10 @@ export default function BioProfilesPage() {
     <ProtectedRoute>
       <DashboardLayout>
         <div>
-          <div className={styles.pageHeader}>
-            <h1>Bio Profiles</h1>
-            <Link href={`${LINKS.DASHBOARD_BIOPROFILE}/create`}>
-              <Button type="main">Create New Profile</Button>
+          <div className={styles.profilesHeader}>
+            <h2>Your Bio Profiles</h2>
+            <Link href={LINKS.DASHBOARD_BIOPROFILE_CREATE}>
+              <Button type="main small">Create New Profile</Button>
             </Link>
           </div>
 
@@ -51,18 +54,18 @@ export default function BioProfilesPage() {
           {!loading && !error && bioProfiles.length === 0 && (
             <div className={styles.emptyState}>
               <p className={styles.emptyStateText}>You don&apos;t have any bio profiles yet.</p>
-              <Link href={`${LINKS.DASHBOARD_BIOPROFILE}/create`}>
+              <Link href={`${LINKS.DASHBOARD_BIOPROFILE_CREATE}`}>
                 <Button className={styles.createButton}>Create Your First Profile</Button>
               </Link>
             </div>
           )}
           
-          {!loading && !error && bioProfiles.length > 0 && (
-            <div className={styles.profilesContainer}>
+         {!loading && !error && bioProfiles.length > 0 && (
+            <VerticalGap type="sm">
               {bioProfiles.map((profile) => (
-                <BioProfileCard key={profile.id} bioProfile={profile} />
+                <BioProfileItem key={profile.id} profile={profile} />
               ))}
-            </div>
+            </VerticalGap>
           )}
         </div>
       </DashboardLayout>

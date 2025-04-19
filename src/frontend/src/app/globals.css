@@ -1,5 +1,6 @@
 :root {
   --gap: 15px;
+  --gap-sm: 10px;
   --gap-lg: 30px;
   
   --radius: 6px;
@@ -9,6 +10,11 @@
    --secondary: oklch(0.967 0.001 286.375);
    --secondary-foreground: oklch(0.21 0.006 285.885);
    --border-color: #e4e4e4;
+
+  --red: #f44336;
+  --gray-text: #333;
+  --gray: #f0f0f0;
+
 }
 
 html,
@@ -37,4 +43,8 @@ a {
 
 .primary-text-color {
   color: var(--primary);
+}
+
+.underline {
+  text-decoration: underline !important;
 }

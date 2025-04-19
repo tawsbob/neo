@@ -1,0 +1,55 @@
+.container {
+  display: inline-block;
+  overflow: hidden;
+  border-radius: 50%;
+  position: relative;
+  
+  // Default styling
+  width: 48px;
+  height: 48px;
+
+  &.small {
+    width: 32px;
+    height: 32px;
+  }
+
+  &.medium {
+    width: 48px;
+    height: 48px;
+  }
+
+  &.large {
+    width: 64px;
+    height: 64px;
+  }
+
+  &.xl {
+    width: 96px;
+    height: 96px;
+  }
+
+  &.bordered {
+    border: 2px solid var(--primary, #fff);
+  }
+
+  &.shadow {
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+  }
+
+  &.center {
+    margin: 0 auto;
+    display: block;
+  }
+
+  &.disabled {
+    opacity: 0.5;
+    pointer-events: none;
+  }
+}
+
+.image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+} 

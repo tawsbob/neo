@@ -75,7 +75,7 @@ const apiRequest = async (endpoint, options = {}) => {
 
 
 
-const modelApiRequest = async (modelName, operation, data = null) => {
+const modelApiRequest = async (modelName, operation, query = null, data = null) => {
 
   const operationMap = {
     findMany: 'GET',
@@ -85,15 +85,19 @@ const modelApiRequest = async (modelName, operation, data = null) => {
     delete: 'DELETE',
   }
 
+
+console.log(query)
   const method = operationMap[operation] || 'GET';
   
-  const queryParams = method === 'GET' && notEmpty(data) 
-  ? `?q=${JSON.stringify(data)}` 
+  const queryParams = notEmpty(query) 
+  ? `?q=${JSON.stringify(query)}` 
   : '';
 
-  const body = method !== 'GET' 
+  const body = notEmpty(data)
   ? JSON.stringify(data) 
   : undefined;
+
+  console.log(query,body)
 
   return apiRequest(`/model/${modelName}/${operation}${queryParams}`, {
     method,
@@ -105,8 +109,9 @@ const modelApiRequest = async (modelName, operation, data = null) => {
 const bioProfileApi = {
   getAll: () => modelApiRequest('BioProfile', 'findMany'),
   getById: (id) => modelApiRequest('BioProfile', 'findUnique', { where: { id } }),
-  create: (data) => modelApiRequest('BioProfile', 'create', { data }),
-  update: (id, data) => modelApiRequest('BioProfile', 'update', { 
+  getByUrl: (url, additionalParams = {}) => modelApiRequest('BioProfile', 'findUnique', { where: { url }, ...additionalParams }),
+  create: (data) => modelApiRequest('BioProfile', 'create', null, { data }),
+  update: (id, data) => modelApiRequest('BioProfile', 'update', null,{ 
     where: { id },
     data
   }),
@@ -119,10 +124,10 @@ const linkInBioApi = {
     where: { bioProfileId } 
   }),
   getById: (id) => modelApiRequest('LinkInBio', 'findUnique', { where: { id } }),
-  create: (data) => modelApiRequest('LinkInBio', 'create', { data }),
-  update: (id, data) => modelApiRequest('LinkInBio', 'update', { 
-    where: { id },
-    data
+  create: (data) => modelApiRequest('LinkInBio', 'create', null, { data }),
+  update: (id, data) => modelApiRequest('LinkInBio', 'update', null, {
+    data,
+    where: { id }
   }),
   delete: (id) => modelApiRequest('LinkInBio', 'delete', { where: { id } }),
 };

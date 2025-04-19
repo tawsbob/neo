@@ -7,7 +7,7 @@
   border-radius: var(--radius);
   font-weight: 900;
   color: #000;
-
+  box-sizing: border-box;
   padding: var(--gap) calc(var(--gap) * 1.8);
 
   text-align: center;
@@ -16,7 +16,7 @@
   border: 1px solid transparent;
 
   line-height: 1.4;
-  border-radius: var(--btn-radius);
+  border-radius: var(--radius);
 
   &:active {
     transform: scale(0.96);
@@ -42,8 +42,6 @@
       font-size: 1.3rem;
     }
   }
-
-  box-sizing: border-box;
 
   &.fluid {
     width: 100%;
@@ -91,9 +89,20 @@
     }
   }
 
+  &.gray {
+    background-color: var(--gray);
+    color: var(--gray-text);
+  }
+
+
+  &.red {
+    background-color: var(--red);
+    color: white;
+  }
+
   &.small {
     font-size: 14px;
-    padding: var(--gap-small) var(--gap-default);
+    padding: var(--gap-sm) var(--gap);
   }
 
   &.micro {

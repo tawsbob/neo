@@ -1,0 +1,23 @@
+.profilesHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 24px;
+}
+
+.emptyState {
+  text-align: center;
+  padding: 48px 24px;
+  background-color: #f9f9f9;
+  border-radius: 8px;
+  margin-top: 24px;
+}
+
+.emptyStateText {
+  color: #666;
+  margin-bottom: 24px;
+}
+
+.createButton {
+  margin-top: 8px;
+}

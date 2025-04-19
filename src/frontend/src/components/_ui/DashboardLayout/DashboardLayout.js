@@ -1,5 +1,4 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import styles from './dashboardLayout.module.scss';
 import { LINKS } from '@/utils/links';
 import { usePathname } from 'next/navigation'
@@ -32,6 +31,11 @@ const DashboardLayout = ({ children }) => {
       path: LINKS.DASHBOARD_BIOPROFILE,
       icon: null,
     },
+    {
+      label: 'Create Bio Profile',
+      path: LINKS.DASHBOARD_BIOPROFILE_CREATE,
+      icon: null,
+    },
   ]
 
   const handleLogout = async () => {
@@ -59,9 +63,9 @@ const DashboardLayout = ({ children }) => {
               )
             })}
             <li className={styles.menuItem}>
-              <Button onClick={handleLogout} className={styles.menuLink}>
-                <span className={styles.menuIcon}>👋</span>
-                <span className={styles.menuText}>Logout</span>
+              <Button type="main fluid" onClick={handleLogout} className={styles.menuLink}>
+                <span>👋 </span>
+                <span>Logout</span>
               </Button>
             </li>
           </ul>
@@ -72,18 +76,6 @@ const DashboardLayout = ({ children }) => {
       </main>
     </div>
   );
-};
-
-DashboardLayout.propTypes = {
-  children: PropTypes.node.isRequired,
-  menuItems: PropTypes.arrayOf(
-    PropTypes.shape({
-      label: PropTypes.string.isRequired,
-      path: PropTypes.string.isRequired,
-      icon: PropTypes.node,
-      active: PropTypes.bool
-    })
-  )
 };
 
 export default DashboardLayout; 
