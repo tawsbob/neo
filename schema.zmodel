@@ -19,6 +19,7 @@ model User {
     email String @unique()
     name String?
     lastName String?
+    password String @omit @password
     // make user profile public
     @@allow('read', true)
 }
