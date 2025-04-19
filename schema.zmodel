@@ -75,6 +75,8 @@ model LinkInBio {
   url String
   bioProfile BioProfile @relation(fields: [bioProfileId], references: [id])
   bioProfileId Int
+  disabled Boolean @default(false)
+  order Int @default(0)
   @@allow('read', true)
   @@allow('create', auth() != null)
   @@allow('update', auth().id == this.bioProfile.userId)

@@ -1,1 +1,3 @@
 - [] atualizar e deletar shortlink
+- [] Criar funcionalidade de ordenar os links na pagina da bio
+- [] Implmentar o delete do bio profile é necessário deletar todos os links antes de deleter o perfil
