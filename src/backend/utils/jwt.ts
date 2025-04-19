@@ -8,8 +8,8 @@ const JWT_SECRET = process.env.JWT_SECRET || 'your-secret-key';
  * @param userId The user ID to include in the token
  * @returns The generated JWT token
  */
-export const generateToken = (userId: number): string => {
-  return jwt.sign({ id: userId }, JWT_SECRET, {
+export const generateToken = ({id, role}: {id: number, role: string}): string => {
+  return jwt.sign({ id, role }, JWT_SECRET, {
     expiresIn: '7d', // Token expires in 7 days
   });
 };

@@ -50,7 +50,10 @@ export const loginUser = async (
     const { password: _, ...userWithoutPassword } = user;
 
     // Generate JWT token
-    const jwt = generateToken(user.id);
+    const jwt = generateToken({
+      id: user.id,
+      role: user.role,
+    });
 
     return {
       user: userWithoutPassword,

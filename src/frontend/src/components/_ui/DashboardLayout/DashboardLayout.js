@@ -27,6 +27,11 @@ const DashboardLayout = ({ children }) => {
       path: LINKS.DASHBOARD_SHORTURL,
       icon: null,
     },
+    {
+      label: 'Bio Profiles',
+      path: LINKS.DASHBOARD_BIOPROFILE,
+      icon: null,
+    },
   ]
 
   const handleLogout = async () => {

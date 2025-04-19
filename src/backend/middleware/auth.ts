@@ -21,9 +21,10 @@ export const authMiddleware = (prisma: PrismaClient) => {
       
       // Extract token
       const token = authHeader.substring(7);
-      
+      console.log(token)
       // Verify token
       const payload = verifyToken(token);
+      console.log(payload)
       if (!payload) {
         // Invalid token, but still continue to next middleware
         await next();

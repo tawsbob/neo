@@ -7,4 +7,6 @@ export const LINKS = {
     VERIFY_EMAIL: '/verify-email',
     DASHBOARD: '/dashboard',
     DASHBOARD_SHORTURL: '/dashboard/shorturl',
+    DASHBOARD_BIOPROFILE: '/dashboard/bioprofile',
+    DASHBOARD_LINKINBIO: '/dashboard/bioprofile/linkinbio',
 }
