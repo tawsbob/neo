@@ -11,13 +11,15 @@ import { authMiddleware } from './middleware/auth';
 const prisma = new PrismaClient();
 const app = new Hono()
 
+const safePrisma = enhance(prisma, { user: { id: -1, role: 'ADMIN' } });
+
 // Root endpoint
 app.get('/', (c) => {
   return c.text('Hello Hono!')
 })
 
 // Apply global authentication middleware
-app.use('*', authMiddleware(prisma));
+app.use('*', authMiddleware(safePrisma));
 
 // ZenStack model API
 app.use(
@@ -34,7 +36,7 @@ app.use(
 
 // Authentication routes
 app.route('/api/auth', createAuthRoutes(
-  enhance(prisma, { user: { id: -1, role: 'BACKEND' } }),
+  safePrisma,
   prisma
 ));
 
