@@ -4,11 +4,11 @@
   cursor: pointer;
   display: inline-block;
   font-size: 16px;
-
+  border-radius: var(--radius);
   font-weight: 900;
   color: #000;
 
-  padding: var(--gap-default) calc(var(--gap-default) * 1.8);
+  padding: var(--gap) calc(var(--gap) * 1.8);
 
   text-align: center;
   vertical-align: middle;
@@ -23,11 +23,11 @@
   }
 
   &:hover {
-    background-color: var(--functional-success-bg);
+    //background-color: var(--functional-success-bg);
   }
 
   &.margin {
-    margin: var(--gap-default) 0;
+    margin: var(--gap) 0;
   }
 
   &.disabled,
@@ -64,27 +64,24 @@
     }
   }
 
-  &.txt-yellow {
-    color: var(--yellow);
-  }
 
   &.yellow {
     background-color: var(--yellow);
-    color: var(--main-color);
+    //color: var(--main-color);
     &.inverted {
-      background-color: transparent;
-      color: var(--yellow);
-      border: 1px solid var(--yellow);
+      //background-color: transparent;
+      //color: var(--yellow);
+      //border: 1px solid var(--yellow);
     }
   }
 
   &.main {
-    background-color: var(--main-color);
+    background-color: var(--primary);
     color: #fff;
     &.inverted {
       background-color: transparent;
-      color: var(--main-color);
-      border: 1px solid var(--main-color);
+      color: var(--primary);
+      border: 1px solid var(--primary);
       background-color: #fff;
     }
 
@@ -92,36 +89,6 @@
       color: var(--main-color);
       background-color: var(--magenta-magenta-50);
     }
-  }
-
-  &.purple {
-    background-color: var(--purple);
-    color: var(--main-color);
-    &.inverted {
-      background-color: transparent;
-      color: var(--main-color);
-      border: 1px solid var(--purple);
-    }
-  }
-
-  &.red {
-    background-color: var(--red);
-    color: #fff;
-    &.inverted {
-      background-color: transparent;
-      color: var(--red);
-      border: 1px solid var(--red);
-      background-color: #fff;
-    }
-
-    &.soft {
-      color: var(--red);
-      background-color: var(--magenta-magenta-50);
-    }
-  }
-
-  &.gray {
-    background-color: var(--stone-stone-200);
   }
 
   &.small {
@@ -138,23 +105,12 @@
     display: none;
   }
 
-  &.icon {
-    display: flex;
-    align-items: center;
-    gap: var(--gap-small);
-  }
-
-  &.icon-right {
-    flex-direction: row-reverse;
-  }
-
   &.content-center {
     justify-content: center;
   }
 
   &.outline {
-    border-color: var(--border-color);
-    color: var(--main-color);
+    
   }
 
   &.text-normal {

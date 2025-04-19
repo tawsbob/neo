@@ -1,3 +1,15 @@
+:root {
+  --gap: 15px;
+  --gap-lg: 30px;
+  
+  --radius: 6px;
+
+  --primary: oklch(0.606 0.25 292.717);
+  --primary-foreground: oklch(0.969 0.016 293.756);
+   --secondary: oklch(0.967 0.001 286.375);
+   --secondary-foreground: oklch(0.21 0.006 285.885);
+   --border-color: #e4e4e4;
+}
 
 html,
 body {
@@ -8,7 +20,7 @@ body {
 body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  font-family: var(--font-abee), sans-serif;
+  font-family: sans-serif;
 }
 
 * {
@@ -20,4 +32,9 @@ body {
 a {
   color: inherit;
   text-decoration: none;
+  color: var(--primary);
+}
+
+.primary-text-color {
+  color: var(--primary);
 }

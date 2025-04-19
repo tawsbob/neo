@@ -1,0 +1,68 @@
+.container {
+  max-width: 440px;
+  width: 100%;
+  padding: var(--gap-lg);
+  background-color: white;
+  border-radius: 12px;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
+  overflow: hidden;
+  position: relative;
+  margin: 0 auto;
+  
+  &::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+  }
+}
+
+.header {
+  text-align: center;
+  margin-bottom: var(--gap-lg);
+}
+
+.title {
+  font-size: 28px;
+  font-weight: 800;
+  margin-bottom: 8px;
+}
+
+.subtitle {
+  font-size: 16px;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--gap);
+}
+
+.forgot-password {
+  display: flex;
+  justify-content: flex-end;
+  margin: 4px 0 16px;
+}
+
+.link {
+  font-size: 14px;
+  font-weight: 600;
+  text-decoration: none;
+  transition: color 0.2s ease;
+  
+  &:hover {
+    text-decoration: underline;
+  }
+}
+
+.submit-button {
+  margin-top: var(--gap);
+}
+
+.footer {
+  text-align: center;
+  margin-top: var(--gap);
+  font-size: 14px;
+} 
