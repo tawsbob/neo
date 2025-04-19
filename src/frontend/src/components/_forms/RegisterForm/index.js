@@ -6,20 +6,28 @@ import Input from "@/components/_ui/input";
 import FormCard from "@/components/_ui/FormCard";
 import { useAuth } from "@/context/AuthContext";
 import { LINKS } from "@/utils/links";
-import styles from "./loginform.module.scss";
+import { useRouter } from "next/navigation";
+import styles from "./registerform.module.scss";
 
 const c = styler(styles);
 
-function LoginForm({ onSuccess = () => {}, className = "" }) {
-  const { login, isLoading: authLoading } = useAuth();
+function RegisterForm({ onSuccess = () => {}, className = "" }) {
+  const router = useRouter();
+  const { register, isLoading: authLoading } = useAuth();
   const [formData, setFormData] = useState({
     email: "",
-    password: ""
+    password: "",
+    confirmPassword: "",
+    name: "",
+    lastName: ""
   });
   
   const [errors, setErrors] = useState({
     email: "",
     password: "",
+    confirmPassword: "",
+    name: "",
+    lastName: "",
     form: ""
   });
   
@@ -53,6 +61,18 @@ function LoginForm({ onSuccess = () => {}, className = "" }) {
     const newErrors = {};
     let isValid = true;
     
+    // Validate name
+    if (!formData.name.trim()) {
+      newErrors.name = "First name is required";
+      isValid = false;
+    }
+    
+    // Validate last name
+    if (!formData.lastName.trim()) {
+      newErrors.lastName = "Last name is required";
+      isValid = false;
+    }
+    
     // Validate email
     if (!formData.email) {
       newErrors.email = "Email is required";
@@ -71,6 +91,15 @@ function LoginForm({ onSuccess = () => {}, className = "" }) {
       isValid = false;
     }
     
+    // Validate confirm password
+    if (!formData.confirmPassword) {
+      newErrors.confirmPassword = "Please confirm your password";
+      isValid = false;
+    } else if (formData.password !== formData.confirmPassword) {
+      newErrors.confirmPassword = "Passwords do not match";
+      isValid = false;
+    }
+    
     setErrors({ ...errors, ...newErrors });
     return isValid;
   }
@@ -81,19 +110,26 @@ function LoginForm({ onSuccess = () => {}, className = "" }) {
     if (validateForm()) {
       setIsLoading(true);
       
+      // Create registration data object, excluding confirmPassword
+      const registrationData = {
+        email: formData.email,
+        password: formData.password,
+        name: formData.name,
+        lastName: formData.lastName
+      };
+      
       try {
-        const result = await login(formData.email, formData.password);
-        console.log(result);
+        const result = await register(registrationData);
         if (result.success) {
           onSuccess(result.user);
         } else {
           setErrors({
             ...errors,
-            form: result.error || "Login failed. Please check your credentials."
+            form: result.error || "Registration failed. Please try again."
           });
         }
       } catch (error) {
-        console.error("Login error:", error);
+        console.error("Registration error:", error);
         setErrors({
           ...errors,
           form: "An unexpected error occurred. Please try again."
@@ -105,14 +141,14 @@ function LoginForm({ onSuccess = () => {}, className = "" }) {
   }
 
   const footerContent = (
-    <p>Don't have an account? <a href={LINKS.REGISTER} className={c("link")}>Sign up</a></p>
+    <p>Already have an account? <a href={LINKS.LOGIN} className={c("link")}>Sign in</a></p>
   );
 
   return (
-    <FormCard 
+    <FormCard
       className={className}
-      title="Welcome Back"
-      subtitle="Sign in to your account"
+      title="Create an Account"
+      subtitle="Fill in your details to get started"
       footer={footerContent}
     >
       <form className={c("form")} onSubmit={handleSubmit}>
@@ -121,6 +157,30 @@ function LoginForm({ onSuccess = () => {}, className = "" }) {
             {errors.form}
           </div>
         )}
+        
+        <div className={c("name-container")}>
+          <Input
+            label="First Name"
+            type="text"
+            name="name"
+            placeholder="Your first name"
+            value={formData.name}
+            onChange={handleChange}
+            error={errors.name}
+            required
+          />
+          
+          <Input
+            label="Last Name"
+            type="text"
+            name="lastName"
+            placeholder="Your last name"
+            value={formData.lastName}
+            onChange={handleChange}
+            error={errors.lastName}
+            required
+          />
+        </div>
         
         <Input
           label="Email"
@@ -137,16 +197,23 @@ function LoginForm({ onSuccess = () => {}, className = "" }) {
           label="Password"
           type="password"
           name="password"
-          placeholder="Your password"
+          placeholder="Create a password"
           value={formData.password}
           onChange={handleChange}
           error={errors.password}
           required
         />
         
-        <div className={c("forgot-password")}>
-          <a href="#" className={c("link")}>Forgot password?</a>
-        </div>
+        <Input
+          label="Confirm Password"
+          type="password"
+          name="confirmPassword"
+          placeholder="Confirm your password"
+          value={formData.confirmPassword}
+          onChange={handleChange}
+          error={errors.confirmPassword}
+          required
+        />
         
         <Button 
           type="main fluid"
@@ -154,11 +221,11 @@ function LoginForm({ onSuccess = () => {}, className = "" }) {
           disabled={isLoading || authLoading}
           className={c("submit-button")}
         >
-          {isLoading || authLoading ? "Signing in..." : "Sign In"}
+          {isLoading || authLoading ? "Creating account..." : "Create Account"}
         </Button>
       </form>
     </FormCard>
   );
 }
 
-export default LoginForm; 
+export default RegisterForm; 

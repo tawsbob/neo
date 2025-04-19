@@ -3,12 +3,13 @@
   align-items: center;
   justify-content: center;
   min-height: 100vh;
-  background-color: #e4e4e4;
+  padding: 1rem;
+  background-color: #f3f4f6;
 }
 
 .container {
   width: 100%;
-  max-width: 440px;
+  max-width: 480px;
 }
 
 .success {
@@ -30,6 +31,18 @@
   }
 }
 
+.loading {
+  text-align: center;
+  padding: 2rem;
+  background-color: white;
+  border-radius: 0.5rem;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  
+  p {
+    font-size: 1rem;
+    color: #6b7280;
+  }
+}
 
 @keyframes fadeIn {
   from {

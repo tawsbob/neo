@@ -2,6 +2,7 @@ import { PrismaClient } from '../generated/prisma';
 import { enhance } from '@zenstackhq/runtime';
 import { createHonoHandler } from '@zenstackhq/server/hono';
 import { Hono } from 'hono'
+import { cors } from 'hono/cors'
 import { logger } from 'hono/logger'  
 import { serve } from '@hono/node-server'
 import { createAuthRoutes } from './routes/auth';
@@ -19,6 +20,10 @@ app.get('/', (c) => {
 })
 
 // Apply global authentication middleware
+app.use('*', cors({
+  origin: 'http://localhost:3001',
+  credentials: true,
+}))
 app.use('*', authMiddleware(safePrisma));
 
 // ZenStack model API

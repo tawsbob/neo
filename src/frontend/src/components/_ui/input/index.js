@@ -20,15 +20,6 @@ function Input({
   ...props
 }) {
   const classTypes = withTypes(inputType);
-  const [focused, setFocused] = useState(false);
-  
-  function handleFocus() {
-    setFocused(true);
-  }
-  
-  function handleBlur() {
-    setFocused(false);
-  }
   
   function handleChange(e) {
     onChange(e);
@@ -36,15 +27,12 @@ function Input({
 
   const hasValue = value !== "";
   const hasError = error !== "";
-
-  console.log(focused)
   
   return (
     <div className={c(
       "container", 
       ...classTypes, 
       className, 
-      toggle(focused, "focused"),
       toggle(hasValue, "has-value"),
       toggle(hasError, "has-error"),
       toggle(disabled, "disabled")
@@ -64,8 +52,6 @@ function Input({
           placeholder={placeholder}
           value={value}
           onChange={handleChange}
-          onFocus={handleFocus}
-          onBlur={handleBlur}
           disabled={disabled}
           required={required}
           {...props}

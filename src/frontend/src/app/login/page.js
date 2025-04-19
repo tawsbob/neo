@@ -1,32 +1,48 @@
 "use client";
-import { useState } from "react";
+import { useRouter } from "next/navigation";
+import { useEffect } from "react";
 import LoginForm from "@/components/_forms/LoginForm";
+import { useAuth } from "@/context/AuthContext";
 import styles from "./page.module.scss";
+import { LINKS } from "@/utils/links";
 
 export default function LoginPage() {
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const router = useRouter();
+  const { isAuthenticated, isLoading } = useAuth();
+  
+  // Redirect to dashboard if already logged in
+  useEffect(() => {
+    if (isAuthenticated && !isLoading) {
+      router.replace(LINKS.DASHBOARD);
+    }
+  }, [isAuthenticated, isLoading, router]);
   
   function handleLoginSuccess() {
-    setIsLoggedIn(true);
+    router.push(LINKS.DASHBOARD);
+  }
+  
+  // Show loading state while checking auth
+  if (isLoading) {
+    return (
+      <main className={styles.main}>
+        <div className={styles.container}>
+          <div className={styles.loading}>
+            <p>Loading...</p>
+          </div>
+        </div>
+      </main>
+    );
+  }
+  
+  // Don't show login form if already authenticated (will redirect via useEffect)
+  if (isAuthenticated) {
+    return null;
   }
   
   return (
     <main className={styles.main}>
       <div className={styles.container}>
-        {isLoggedIn ? (
-          <div className={styles.success}>
-            <h1>Welcome Back!</h1>
-            <p>You have successfully logged in.</p>
-            <button 
-              className={styles.logoutButton}
-              onClick={() => setIsLoggedIn(false)}
-            >
-              Log Out
-            </button>
-          </div>
-        ) : (
-          <LoginForm onSuccess={handleLoginSuccess} />
-        )}
+        <LoginForm onSuccess={handleLoginSuccess} />
       </div>
     </main>
   );
