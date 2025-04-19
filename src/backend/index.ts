@@ -6,6 +6,7 @@ import { cors } from 'hono/cors'
 import { logger } from 'hono/logger'  
 import { serve } from '@hono/node-server'
 import { createAuthRoutes } from './routes/auth';
+import { createShortlinkRoutes } from './routes/shortlink';
 import { authMiddleware } from './middleware/auth';
 
 // Initialize Prisma client
@@ -43,6 +44,11 @@ app.use(
 app.route('/api/auth', createAuthRoutes(
   safePrisma,
   prisma
+));
+
+// Shortlink routes
+app.route('/api/shortlink', createShortlinkRoutes(
+  safePrisma
 ));
 
 // Start server
