@@ -1,0 +1,86 @@
+// Dashboard layout variables
+
+// Main container for dashboard layout
+.dashboardContainer {
+  display: flex;
+  min-height: 100vh;
+  width: 100%;
+}
+
+// Sidebar styles
+.sidebar {
+  width: 250px;
+  background-color: #fff;
+  flex-shrink: 0;
+  overflow-y: auto;
+  border-right: 1px solid var(--border-color);
+}
+
+.nav {
+  padding: 16px 0;
+}
+
+.menuList {
+  list-style: none;
+  padding: var(--gap);
+  margin: 0;
+  display: grid;
+  grid-template-columns: 1fr;
+}
+
+.menuItem {
+  margin-bottom: 4px;
+}
+
+.menuLink {
+  display: flex;
+  align-items: center;
+  padding: 10px 16px;
+  color: #333;
+  text-decoration: none;
+  transition: background-color 0.2s;
+  border-radius: var(--radius);
+  
+  &:hover {
+    background-color: hsl(240 4.8% 95.9%);
+  }
+  
+  &.active {
+    background-color: hsl(240 4.8% 95.9%);
+    font-weight: 500;
+    color: var(--primary);
+  }
+}
+
+.menuIcon {
+  margin-right: 12px;
+  display: flex;
+  align-items: center;
+}
+
+.menuText {
+  font-size: 14px;
+}
+
+// Content area styles
+.content {
+  flex: 1;
+  padding: var(--gap-lg);
+  overflow-y: auto;
+}
+
+// Media query for responsive behavior
+@media (max-width: 768px) {
+  .dashboardContainer {
+    flex-direction: column;
+  }
+  
+  .sidebar {
+    width: 100%;
+    border-right: none;
+  }
+  
+  .content {
+    width: 100%;
+  }
+} 

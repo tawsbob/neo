@@ -2,6 +2,7 @@
 
 import { useAuth } from "@/context/AuthContext";
 import ProtectedRoute from "@/components/ProtectedRoute";
+import Link from "next/link";
 
 export default function DashboardPage() {
   const { user, logout } = useAuth();
@@ -22,6 +23,17 @@ export default function DashboardPage() {
           >
             Logout
           </button>
+        </div>
+        
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+          <Link href="/dashboard/shorturl" className="block">
+            <div className="bg-white rounded-lg shadow p-6 hover:shadow-md transition-shadow">
+              <h3 className="text-xl font-semibold mb-2 primary-text-color">URL Shortener</h3>
+              <p className="text-gray-600">Create and manage shortened URLs for easy sharing.</p>
+            </div>
+          </Link>
+          
+          {/* Add more feature cards here in the future */}
         </div>
         
         <div className="bg-white rounded-lg shadow p-6">

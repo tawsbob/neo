@@ -1,0 +1,95 @@
+.formContainer {
+  margin: 0 auto;
+  padding: var(--gap);
+  border-radius: var(--radius);
+  background-color: white;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.formTitle {
+  margin-bottom: var(--gap);
+  font-size: 1.5rem;
+  font-weight: 600;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--gap);
+}
+
+.formGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.input {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius);
+  font-size: 1rem;
+  transition: border-color 0.2s;
+
+  &:focus {
+    outline: none;
+    border-color: var(--primary);
+  }
+}
+
+.checkboxGroup {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.checkbox {
+  cursor: pointer;
+  width: 18px;
+  height: 18px;
+  accent-color: var(--primary);
+}
+
+.helpText {
+  font-size: 0.875rem;
+  color: #666;
+  margin-top: 4px;
+}
+
+.submitButton {
+  padding: 12px;
+  background-color: var(--primary);
+  color: var(--primary-foreground);
+  border: none;
+  border-radius: var(--radius);
+  font-size: 1rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: opacity 0.2s;
+
+  &:disabled {
+    opacity: 0.7;
+    cursor: not-allowed;
+  }
+
+  &:hover:not(:disabled) {
+    opacity: 0.9;
+  }
+}
+
+.errorMessage {
+  padding: 10px;
+  border-radius: var(--radius);
+  background-color: #fee2e2;
+  color: #b91c1c;
+  margin-bottom: var(--gap);
+}
+
+.successMessage {
+  padding: 10px;
+  border-radius: var(--radius);
+  background-color: #d1fae5;
+  color: #065f46;
+  margin-bottom: var(--gap);
+} 

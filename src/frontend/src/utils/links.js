@@ -6,4 +6,5 @@ export const LINKS = {
     RESET_PASSWORD: '/reset-password',
     VERIFY_EMAIL: '/verify-email',
     DASHBOARD: '/dashboard',
+    DASHBOARD_SHORTURL: '/dashboard/shorturl',
 }
