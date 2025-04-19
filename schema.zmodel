@@ -14,12 +14,20 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+enum UserRole {
+    ADMIN
+    USER
+}
+
 model User {
     id Int @id() @default(autoincrement())
     email String @unique()
     name String?
     lastName String?
     password String @omit @password
+    emailVerified Boolean @default(false)
+    role UserRole @default(USER)
     // make user profile public
     @@allow('read', true)
+    @@allow('all', auth().role == 'ADMIN' || auth().role == 'BACKEND')
 }

@@ -13,9 +13,17 @@ generator client {
   output   = "../src/generated/prisma"
 }
 
+enum UserRole {
+  ADMIN
+  USER
+}
+
 model User {
-  id       Int     @id() @default(autoincrement())
-  email    String  @unique()
-  name     String?
-  lastName String?
+  id            Int      @id() @default(autoincrement())
+  email         String   @unique()
+  name          String?
+  lastName      String?
+  password      String
+  emailVerified Boolean  @default(false)
+  role          UserRole @default(USER)
 }

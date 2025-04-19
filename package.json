@@ -22,9 +22,13 @@
     "@prisma/client": "6.6.x",
     "@zenstackhq/runtime": "2.14.0",
     "@zenstackhq/server": "^2.14.0",
-    "hono": "^4.7.7"
+    "bcrypt": "^5.1.1",
+    "hono": "^4.7.7",
+    "jsonwebtoken": "^9.0.2"
   },
   "devDependencies": {
+    "@types/bcrypt": "^5.0.2",
+    "@types/jsonwebtoken": "^9.0.9",
     "@types/node": "^22.14.1",
     "prisma": "6.6.x",
     "tsx": "^4.19.3",
