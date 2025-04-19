@@ -9,22 +9,8 @@ import { ShortlinkService } from '@/services/shortlink.service';
 import styles from './shorturl.module.scss';
 import DashboardLayout from '@/components/_ui/DashboardLayout';
 import { LINKS } from '@/utils/links';
+import Divider from '@/components/_ui/divider';
 
-const menuItems = [
-  {
-    label: 'Dashboard',
-    path: LINKS.DASHBOARD,
-    icon: null,
-    active: true
-  },
-  {
-    label: 'Shortlinks',
-    path: LINKS.DASHBOARD_SHORTURL,
-    icon: null,
-    active: false
-  },
-  // More menu items...
-];
 
 export default function ShortUrlPage() {
   const { user } = useAuth();
@@ -58,7 +44,7 @@ export default function ShortUrlPage() {
 
   return (
     <ProtectedRoute>
-      <DashboardLayout menuItems={menuItems}>
+      <DashboardLayout>
       <div className={styles.container}>
         {/* <div className={styles.header}>
           <h1 className={styles.title}>URL Shortener</h1>
@@ -71,7 +57,7 @@ export default function ShortUrlPage() {
           <section className={styles.formSection}>
             <ShortlinkForm onSuccess={handleShortlinkCreated} />
           </section>
-
+          <Divider margin="large" />
           <section className={styles.listSection}>
             {loading ? (
               <div className={styles.loadingState}>Loading your shortlinks...</div>

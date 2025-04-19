@@ -3,7 +3,6 @@
 import { useState } from 'react';
 import { ShortlinkService } from '@/services/shortlink.service';
 import styles from './shortlinkform.module.scss';
-import FormCard from '@/components/_ui/FormCard';
 
 const INITIAL_FORM_STATE = {
   url: '',
@@ -57,9 +56,8 @@ export default function ShortlinkForm({ onSuccess }) {
   };
 
   return (
-    <FormCard 
+    <div 
       className={styles.formContainer}
-      title="Create New Shortlink"
     >
       
         <h2 className={styles.formTitle}></h2>
@@ -112,6 +110,6 @@ export default function ShortlinkForm({ onSuccess }) {
           {loading ? 'Creating...' : 'Create Shortlink'}
         </button>
       </form>
-    </FormCard>
+    </div>
   );
 } 

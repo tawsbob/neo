@@ -1,9 +1,6 @@
 .formContainer {
   margin: 0 auto;
-  padding: var(--gap);
-  border-radius: var(--radius);
   background-color: white;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
 }
 
 .formTitle {
@@ -15,7 +12,7 @@
 .form {
   display: flex;
   flex-direction: column;
-  gap: var(--gap);
+  gap: var(--gap-lg);
 }
 
 .formGroup {
