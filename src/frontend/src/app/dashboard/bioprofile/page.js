@@ -39,13 +39,12 @@ export default function BioProfilesPage() {
   return (
     <ProtectedRoute>
       <DashboardLayout>
-        <div>
-          <div className={styles.profilesHeader}>
-            <h2>Your Bio Profiles</h2>
+        <VerticalGap>
+          <HorizontalGap align="right">
             <Link href={LINKS.DASHBOARD_BIOPROFILE_CREATE}>
               <Button type="main small">Create New Profile</Button>
             </Link>
-          </div>
+          </HorizontalGap>
 
           {loading && <p>Loading profiles...</p>}
           
@@ -67,7 +66,7 @@ export default function BioProfilesPage() {
               ))}
             </VerticalGap>
           )}
-        </div>
+        </VerticalGap>
       </DashboardLayout>
     </ProtectedRoute>
   );

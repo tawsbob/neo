@@ -12,6 +12,7 @@ import { LINKS } from '@/utils/links';
 import Card from '@/components/_ui/Card';
 import HorizontalGap from '@/components/_ui/HorizontalGap';
 import VerticalGap from '@/components/_ui/VerticalGap';
+import Divider from '@/components/_ui/divider';
 
 export default function EditBioProfilePage({ params }) {
   const router = useRouter();
@@ -225,6 +226,16 @@ export default function EditBioProfilePage({ params }) {
               </HorizontalGap>
             </form>
           </Card>
+          <Divider margin="none" />
+          <Card>
+            <VerticalGap type="sm"  >
+              <h3>Danger Zone</h3>
+              <p>Deleting this profile will also delete all associated links.</p>
+              <Button type="red small" onClick={handleDelete}>Delete Profile</Button>
+            </VerticalGap>
+            
+          </Card>
+          
         </VerticalGap>
       </DashboardLayout>
     </ProtectedRoute>
